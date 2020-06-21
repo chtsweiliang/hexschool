@@ -1,0 +1,2 @@
+# hexschool
+ init
