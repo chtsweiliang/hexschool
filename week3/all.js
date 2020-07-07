@@ -108,5 +108,16 @@ new Vue({
       }
       $('#delProductModal').modal('hide');
     },
+    delComment() {
+      if (this.tempComment.id) {
+        this.products.forEach((item, i) => {
+          if (item.options.id === this.tempComment.id) {
+            this.products[i].options = {};
+            this.tempComment = {};
+          }
+        });
+      }
+      $('#commetProductModal').modal('hide');
+    }
   },
 });
