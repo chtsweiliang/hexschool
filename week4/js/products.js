@@ -1,36 +1,3 @@
-Vue.component('commetProductModal', {
-    template: '#commetProductModal',
-    data() {
-        return {
-        };
-    },
-    props: {
-        tempProduct: {
-            type: Object,
-            default() {
-                return {
-                    imageUrl: [],
-                };
-            },
-        }
-    },
-    methods: {
-        // 刪除評價
-        delComment() {
-            const url = `https://course-ec-api.hexschool.io/api/${this.user.uuid}/admin/ec/product/${this.tempProduct.id}`;
-
-            //預設帶入 token
-            axios.defaults.headers.common.Authorization = `Bearer ${this.user.token}`;
-
-            axios.delete(url).then(() => {
-                $('#commetProductModal').modal('hide');
-                this.$emit('update');
-            });
-        },
-    }
-});
-
-
 Vue.component('delProductModal', {
     template: '#delProductModal',
     data() {
@@ -242,10 +209,6 @@ new Vue({
                 case 'delete':
                     this.tempProduct = Object.assign({}, item);
                     $('#delProductModal').modal('show');
-                    break;
-                case 'commet':
-                    this.tempComment = Object.assign({}, item);
-                    $('#commetProductModal').modal('show');
                     break;
                 default:
                     break;
