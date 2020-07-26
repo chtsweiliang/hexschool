@@ -59,8 +59,15 @@ new Vue({
       const url = `${this.api}${this.uuid}/ec/shopping`;
       axios.get(url)
         .then(res => {
-          this.quantity = res.data.data.length === 0 ? 0 : res.data.data.map(item => item.quantity).reduce((first, current) => first + current);
-        
+          const vm = this;
+          vm.quantity = 0;
+          let totalNum = 0;
+          if (res.data.data.length) {
+            res.data.data.forEach(function (item) {
+              totalNum = totalNum + item.quantity;
+            });
+            vm.quantity = totalNum;
+          }
         })
         .catch(error => {
           console.log(error);

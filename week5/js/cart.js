@@ -60,8 +60,8 @@ new Vue({
                     this.isLoading = false;
                 })
                 .catch(error => {
-                    console.log(error);
                     this.isLoading = false;
+                    console.log(error.response.data.errors);
                 })
         },
         removeAllCart() {
@@ -110,14 +110,15 @@ new Vue({
         createOrder() {
             this.isLoading = true;
             const url = `${ this.api }${ this.uuid }/ec/orders`;
-            
             axios.post(url, this.form)
                 .then(res => {
                     this.isLoading = false;
+                    // 跳出提示訊息
                     $(this.$refs.orderModal).modal('show');
                     
                     setTimeout(() => {
                         $(this.$refs.orderModal).modal('hide');
+                        // 重新渲染購物車
                         this.getCart();
                     }, 2000);
                 })
